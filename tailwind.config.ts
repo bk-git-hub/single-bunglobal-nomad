@@ -12,8 +12,7 @@ export default {
         assacom: ['AssacomFreeGothicTTF-Regular', 'sans-serif'],
       },
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        primary: '#112211',
       },
     },
   },
