@@ -46,16 +46,18 @@ describe('SignUpForm', () => {
     const emailInput = screen.getByLabelText(/이메일/i) as HTMLInputElement;
     const nicknameInput = screen.getByLabelText(/닉네임/i) as HTMLInputElement;
     const passwordInput = screen.getByLabelText(
-      /비밀번호/i
+      /비밀번호$/i
     ) as HTMLInputElement;
     const passwordCheckInput = screen.getByLabelText(
-      /비밀번호 확인/i
+      /비밀번호 확인$/i
     ) as HTMLInputElement;
+    const submitButton = screen.getByRole('button', { name: /회원가입$/i });
 
     await userEvent.type(emailInput, invalidEmail);
     await userEvent.type(nicknameInput, invalidNickName);
     await userEvent.type(passwordInput, invalidPassword);
     await userEvent.type(passwordCheckInput, validPassword); // Different password
+    await userEvent.click(submitButton);
 
     await waitFor(() => {
       expect(
@@ -78,16 +80,18 @@ describe('SignUpForm', () => {
     const emailInput = screen.getByLabelText(/이메일/i) as HTMLInputElement;
     const nicknameInput = screen.getByLabelText(/닉네임/i) as HTMLInputElement;
     const passwordInput = screen.getByLabelText(
-      /비밀번호/i
+      /비밀번호$/i
     ) as HTMLInputElement;
     const passwordCheckInput = screen.getByLabelText(
-      /비밀번호 확인/i
+      /비밀번호 확인$/i
     ) as HTMLInputElement;
+    const submitButton = screen.getByRole('button', { name: /회원가입$/i });
 
     await userEvent.type(emailInput, validEmail);
     await userEvent.type(nicknameInput, validNickName);
     await userEvent.type(passwordInput, validPassword);
     await userEvent.type(passwordCheckInput, validPassword);
+    await userEvent.click(submitButton);
 
     await waitFor(() => {
       expect(
