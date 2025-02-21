@@ -15,8 +15,8 @@ describe('SignUpForm', () => {
     render(<SignUpForm />);
     expect(screen.getByLabelText(/이메일/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/닉네임/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/비밀번호/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/비밀번호 확인/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/비밀번호$/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/비밀번호 확인$/i)).toBeInTheDocument();
   });
 
   test('update value test', async () => {
@@ -24,10 +24,10 @@ describe('SignUpForm', () => {
     const emailInput = screen.getByLabelText(/이메일/i) as HTMLInputElement;
     const nicknameInput = screen.getByLabelText(/닉네임/i) as HTMLInputElement;
     const passwordInput = screen.getByLabelText(
-      /비밀번호/i
+      /비밀번호$/i
     ) as HTMLInputElement;
     const passwordCheckInput = screen.getByLabelText(
-      /비밀번호 확인/i
+      /비밀번호 확인$/i
     ) as HTMLInputElement;
 
     await userEvent.type(emailInput, validEmail);
