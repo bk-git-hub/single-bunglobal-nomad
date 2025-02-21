@@ -46,15 +46,15 @@ export default function SignInForm() {
       >
         <AuthPageInput
           placeholder='example@email.com'
-          id='email'
-          {...register('email')}
+          idText='email'
+          register={register('email')}
           labelText='이메일'
           errorMsg={errors.email ? errors.email.message : ''}
         />
         <PasswordInput
           errors={errors}
           labelText='비밀번호'
-          {...register('password')}
+          register={register('password')}
           id='password'
         />
         <button

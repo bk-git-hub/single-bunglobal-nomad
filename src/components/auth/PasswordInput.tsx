@@ -1,17 +1,18 @@
 import Image from 'next/image';
-import { useState, Ref } from 'react';
+import { useState } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 interface PasswordInputProps {
   errors: { password?: { message?: string } };
   labelText: string;
-  ref: Ref<HTMLInputElement>;
+  register: UseFormRegisterReturn;
   id: string;
 }
 
 export default function PasswordInput({
   errors,
   labelText,
-  ref,
+  register,
   id,
 }: PasswordInputProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -29,7 +30,7 @@ export default function PasswordInput({
           className='focus:outline-none flex-1'
           id={id}
           type={isVisible ? 'text' : 'password'}
-          ref={ref}
+          {...register}
         />
         <button
           type='button'

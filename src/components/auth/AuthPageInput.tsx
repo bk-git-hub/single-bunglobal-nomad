@@ -1,35 +1,35 @@
-import { Ref } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 interface AuthPageInputProps {
   errorMsg?: string;
   labelText: string;
-  ref: Ref<HTMLInputElement>;
+  ref?: React.Ref<HTMLInputElement>;
   placeholder?: string;
-  id: string;
+  idText: string;
+  register?: UseFormRegisterReturn;
 }
 
 export default function AuthPageInput({
   errorMsg,
   labelText,
   placeholder,
-  ref,
-  id,
+  idText,
+  register,
 }: AuthPageInputProps) {
   return (
     <div className='w-full relative'>
-      <label htmlFor={id}>{labelText}</label>
+      <label htmlFor={idText}>{labelText}</label>
       <div
-        id='wrapper'
         className={`flex items-center justify-between px-5 py-4 border rounded-[6px] focus-within:border-[#79747E] focus-within:outline focus-within:outline-primary ${
-          errorMsg !== '' ? 'border-red-500' : 'border-[#79747E]'
+          errorMsg ? 'border-red-500' : 'border-[#79747E]'
         }`}
       >
         <input
           placeholder={placeholder ? placeholder : ''}
           className='focus:outline-none flex-1'
-          id={id}
+          id={idText}
           type='text'
-          ref={ref}
+          {...register}
         />
       </div>
       {errorMsg !== '' && (
