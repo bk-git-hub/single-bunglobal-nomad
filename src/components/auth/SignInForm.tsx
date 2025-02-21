@@ -6,6 +6,7 @@ import { z } from 'zod';
 import Link from 'next/link';
 import Image from 'next/image';
 import PasswordInput from './PasswordInput';
+import AuthPageInput from './AuthPageInput';
 
 const signInSchema = z.object({
   email: z.string().email('유효하지 않은 이메일 형식입니다'),
@@ -43,24 +44,13 @@ export default function SignInForm() {
         onSubmit={handleSubmit(onSubmit)}
         className='w-full flex flex-col gap-7'
       >
-        <div className='flex flex-col gap-1 relative'>
-          <label htmlFor='email'>이메일</label>
-          <input
-            id='email'
-            type='text'
-            {...register('email')}
-            placeholder='example@email.com'
-            className={`px-5 py-4 border rounded-[6px] focus:outline-primary ${
-              errors.email ? 'border-red-500' : 'border-[#79747E]'
-            }`}
-          />
-          {errors.email && (
-            <p className='absolute top-full left-0 mt-1 text-red-500'>
-              {errors.email.message}
-            </p>
-          )}
-        </div>
-
+        <AuthPageInput
+          placeholder='example@email.com'
+          id='email'
+          {...register('email')}
+          labelText='이메일'
+          errorMsg={errors.email ? errors.email.message : ''}
+        />
         <PasswordInput
           errors={errors}
           labelText='비밀번호'
