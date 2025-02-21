@@ -3,10 +3,9 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 interface AuthPageInputProps {
   errorMsg?: string;
   labelText: string;
-  ref?: React.Ref<HTMLInputElement>;
   placeholder?: string;
   idText: string;
-  register?: UseFormRegisterReturn;
+  register: UseFormRegisterReturn;
 }
 
 export default function AuthPageInput({
