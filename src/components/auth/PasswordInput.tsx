@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
 interface PasswordInputProps {
-  errors: { password?: { message?: string } };
+  errorMsg?: string;
   labelText: string;
   register: UseFormRegisterReturn;
   id: string;
 }
 
 export default function PasswordInput({
-  errors,
+  errorMsg,
   labelText,
   register,
   id,
@@ -23,7 +23,7 @@ export default function PasswordInput({
       <div
         id='wrapper'
         className={`flex items-center justify-between px-5 py-4 border rounded-[6px] focus-within:border-[#79747E] focus-within:outline focus-within:outline-primary ${
-          errors.password ? 'border-red-500' : 'border-[#79747E]'
+          errorMsg ? 'border-red-500' : 'border-[#79747E]'
         }`}
       >
         <input
@@ -45,10 +45,8 @@ export default function PasswordInput({
           />
         </button>
       </div>
-      {errors.password && (
-        <p className='absolute top-full left-0 mt-1 text-red-500'>
-          {errors.password.message}
-        </p>
+      {errorMsg && (
+        <p className='absolute top-full left-0 mt-1 text-red-500'>{errorMsg}</p>
       )}
     </div>
   );

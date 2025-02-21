@@ -52,7 +52,7 @@ export default function SignInForm() {
           errorMsg={errors.email ? errors.email.message : ''}
         />
         <PasswordInput
-          errors={errors}
+          errorMsg={errors.password ? errors.password.message : ''}
           labelText='비밀번호'
           register={register('password')}
           id='password'
