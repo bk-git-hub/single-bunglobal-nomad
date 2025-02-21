@@ -39,7 +39,7 @@ export default function SignInForm() {
         {errors.email && <p>{errors.email.message}</p>}
       </div>
       <div>
-        <label htmlFor='email'>비밀번호</label>
+        <label htmlFor='password'>비밀번호</label>
         <input id='password' type='password' {...register('password')}></input>
         {errors.password && <p>{errors.password.message}</p>}
       </div>
