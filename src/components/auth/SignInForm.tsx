@@ -9,6 +9,7 @@ import PasswordInput from './PasswordInput';
 import AuthPageInput from './AuthPageInput';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const signInSchema = z.object({
   email: z.string().email('유효하지 않은 이메일 형식입니다'),
@@ -19,6 +20,7 @@ type SignInFormValues = z.infer<typeof signInSchema>;
 
 export default function SignInForm() {
   const router = useRouter();
+  const [waiting, setWaiting] = useState<boolean>(false);
 
   const {
     register,
@@ -29,12 +31,11 @@ export default function SignInForm() {
   });
 
   const onSubmit = async (data: SignInFormValues) => {
-    const callbackUrl = '/';
+    setWaiting(true);
     const result = await signIn('credentials', {
       redirect: false,
       email: data.email,
       password: data.password,
-      callbackUrl,
     });
 
     if (result?.error) {
@@ -43,6 +44,7 @@ export default function SignInForm() {
       console.log('Signin successful');
       router.push('/');
     }
+    setWaiting(false);
   };
 
   return (
@@ -74,6 +76,7 @@ export default function SignInForm() {
         />
         <button
           type='submit'
+          disabled={waiting}
           className='mt-7 py-4 bg-primary text-white rounded-[6px]'
         >
           로그인
