@@ -26,6 +26,7 @@ export default function SignInForm() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<SignInFormValues>({
     resolver: zodResolver(signInSchema),
   });
@@ -39,9 +40,11 @@ export default function SignInForm() {
     });
 
     if (result?.error) {
-      console.log('Sign-in error', result.error);
+      setError('email', {
+        message: '이메일또는 비밀번호가 일치하지 않습니다',
+      });
+      setError('password', { message: ' ' });
     } else {
-      console.log('Signin successful');
       router.push('/');
     }
     setWaiting(false);
