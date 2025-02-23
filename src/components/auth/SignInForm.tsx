@@ -77,9 +77,13 @@ export default function SignInForm() {
         <button
           type='submit'
           disabled={waiting}
-          className='mt-7 py-4 bg-primary text-white rounded-[6px]'
+          className='mt-7 py-4 bg-primary text-white rounded-[6px] flex justify-center items-center'
         >
-          로그인
+          {waiting ? (
+            <div className='spinner'></div> // Spinner when waiting
+          ) : (
+            '로그인' // Text when not waiting
+          )}
         </button>
       </form>
 
