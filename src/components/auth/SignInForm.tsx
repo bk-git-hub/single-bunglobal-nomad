@@ -7,6 +7,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import PasswordInput from './PasswordInput';
 import AuthPageInput from './AuthPageInput';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const signInSchema = z.object({
   email: z.string().email('유효하지 않은 이메일 형식입니다'),
@@ -16,18 +18,31 @@ const signInSchema = z.object({
 type SignInFormValues = z.infer<typeof signInSchema>;
 
 export default function SignInForm() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<SignInFormValues>({
     resolver: zodResolver(signInSchema),
   });
 
-  const onSubmit = (data: SignInFormValues) => {
-    console.log('Form data:', data);
-    reset();
+  const onSubmit = async (data: SignInFormValues) => {
+    const callbackUrl = '/';
+    const result = await signIn('credentials', {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+      callbackUrl,
+    });
+
+    if (result?.error) {
+      console.log('Sign-in error', result.error);
+    } else {
+      console.log('Signin successful');
+      router.push('/');
+    }
   };
 
   return (
