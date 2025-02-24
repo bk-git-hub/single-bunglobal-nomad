@@ -51,7 +51,7 @@ export default function SignInForm() {
   };
 
   return (
-    <div className='flex flex-col gap-[40px] items-center w-[640px]'>
+    <div className='flex flex-col gap-[40px] items-center max-w-[640px]'>
       <Link href={'/'}>
         <Image
           src={'/GlobalNomadIcon.svg'}
