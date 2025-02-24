@@ -8,6 +8,8 @@ import { z } from 'zod';
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
+import axiosClient from '@/lib/axiosClient';
 
 const signUpSchema = z
   .object({
@@ -30,12 +32,25 @@ export default function SignUpForm() {
     formState: { errors },
   } = useForm<SignUpFormValues>({ resolver: zodResolver(signUpSchema) });
 
-  const onSubmit = (data: SignUpFormValues) => {
-    console.log('Form data:', data);
+  const [waiting, setWaiting] = useState(false);
+
+  const onSubmit = async (data: SignUpFormValues) => {
+    setWaiting(true);
+    try {
+      const response = await axiosClient.post('/signup', data);
+
+      if (response.status === 201) {
+        console.log('회원가입완료');
+      }
+    } catch (error) {
+      console.log('회원가입 실패', error);
+    } finally {
+      setWaiting(false);
+    }
   };
 
   return (
-    <div className='flex flex-col gap-[40px] items-center w-[640px]'>
+    <div className='flex flex-col gap-[40px] items-center max-w-[640px]'>
       <Link href={'/'}>
         <Image
           src={'/GlobalNomadIcon.svg'}
@@ -76,9 +91,13 @@ export default function SignUpForm() {
         />
         <button
           type='submit'
-          className='mt-7 py-4 bg-primary text-white rounded-[6px]'
+          className='mt-7 py-4 bg-primary text-white rounded-[6px] flex items-center justify-center'
         >
-          회원가입
+          {waiting ? (
+            <div className='spinner'></div> // Spinner when waiting
+          ) : (
+            '회원가입' // Text when not waiting
+          )}
         </button>
       </form>
 
