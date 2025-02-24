@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-
+import SignOutButton from './SignOutButton';
 interface Props {
   name: string;
   image: string;
@@ -23,12 +23,11 @@ export default function UserProfileDropdown({ name, image }: Props) {
           <AvatarFallback>{name}</AvatarFallback>
         </Avatar>
         <DropdownMenuContent>
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel>내 정보</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Team</DropdownMenuItem>
-          <DropdownMenuItem>Subscription</DropdownMenuItem>
+          <DropdownMenuItem>
+            <SignOutButton />
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenuTrigger>
     </DropdownMenu>
