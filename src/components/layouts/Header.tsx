@@ -1,6 +1,6 @@
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
-import UserProfileDropdown from './UserProfileDropdown';
+import UserProfileDropdown from '../ui/dropdown/UserProfileDropdown';
 import Image from 'next/image';
 import Link from 'next/link';
 

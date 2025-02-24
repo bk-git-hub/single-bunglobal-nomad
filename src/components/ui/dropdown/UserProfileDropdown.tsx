@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import SignOutButton from './SignOutButton';
+import SignOutButton from '../../auth/SignOutButton';
 interface Props {
   name: string;
   image: string;
