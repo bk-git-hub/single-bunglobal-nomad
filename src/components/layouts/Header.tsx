@@ -1,6 +1,6 @@
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
-
+import UserProfileDropdown from './UserProfileDropdown';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -23,7 +23,7 @@ export default async function Header() {
           <Link href={'/signup'}>회원가입</Link>
         </div>
       ) : (
-        <div className='flex'>{session.user.name}</div>
+        <UserProfileDropdown {...session.user} />
       )}
     </header>
   );
