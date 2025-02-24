@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Global Nomad',
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang='ko'>
       <body className='flex flex-col items-center font-assacom'>
         {children}
+        <Toaster />
       </body>
     </html>
   );

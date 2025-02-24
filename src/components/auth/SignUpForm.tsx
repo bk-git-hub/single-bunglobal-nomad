@@ -5,11 +5,12 @@ import PasswordInput from './PasswordInput';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-
+import toast from 'react-hot-toast';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import axiosClient from '@/lib/axiosClient';
+import { useRouter } from 'next/navigation';
 
 const signUpSchema = z
   .object({
@@ -26,6 +27,7 @@ const signUpSchema = z
 type SignUpFormValues = z.infer<typeof signUpSchema>;
 
 export default function SignUpForm() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -40,7 +42,8 @@ export default function SignUpForm() {
       const response = await axiosClient.post('/signup', data);
 
       if (response.status === 201) {
-        console.log('회원가입완료');
+        toast.success('회원가입 완료');
+        router.push('/signin');
       }
     } catch (error) {
       console.log('회원가입 실패', error);
